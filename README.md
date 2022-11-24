@@ -1,0 +1,1 @@
+# Architectural_IMAGEboard_SPICED_ACADEMY
