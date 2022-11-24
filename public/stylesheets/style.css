@@ -97,6 +97,27 @@ body {
     color: black;
 }
 
+@media (max-width: 700px) {
+    .nav-bar {
+        flex-direction: column;
+        margin-bottom: 40px;
+    }
+
+    .nav-bar .nav-links {
+        width: 85%;
+    }
+    .navbar-logo {
+        flex-direction: column;
+        text-align: center;
+        width: 55%;
+        margin: 30px;
+    }
+
+    .logo {
+        margin-bottom: 10px;
+    }
+}
+
 /* --------------- images uploading area ----------------- */
 .img-upload-container {
     margin: auto;
@@ -253,6 +274,21 @@ body {
     font-variation-settings: "FILL" 1, "wght" 300, "GRAD" 0, "opsz" 24;
 }
 
+@media (max-width: 700px) {
+    .imgboard-container {
+        width: 85%;
+        grid-template-columns: 1fr;
+    }
+
+    .card-desc a {
+        font-size: 1.3rem;
+    }
+
+    .card-desc p {
+        font-size: 1.2rem;
+    }
+}
+
 /* --- load more btn --- */
 .load-more-container {
     width: 95%;
@@ -280,8 +316,11 @@ body {
     border: solid 1px white;
 }
 
-/* ------------------- Modal ------------------ */
-/* --- Overlay with side menu ----- */
+@media (max-width: 700px) {
+    .load-more-container button {
+        width: 40%;
+    }
+} /* ------------------- Modal ------------------ */ /* --- Overlay with side menu ----- */
 #overlay {
     position: fixed;
     top: 0;
@@ -348,6 +387,24 @@ body {
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+}
+
+@media (max-width: 700px) {
+    .modal-container {
+        position: fixed;
+        width: 80vw;
+        max-height: 90vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0.877);
+        border-radius: 20px;
+        /* display: none; */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
 }
 
 /* -------- comments --------- */
