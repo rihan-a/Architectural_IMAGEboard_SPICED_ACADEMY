@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100;200;300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,600,0,0" />
+    <!-- <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /> -->
+
+    <title>Imageboard</title>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <!---------------------------  navbar area  ------------------------------>
+        <nav>
+            <div class=" nav-bar">
+                <div class="navbar-logo">
+                    <div class="logo">
+                        <span class="material-symbols-outlined">
+                            grain
+                        </span>
+                    </div>
+                    <h3>Architecture - Moodboard</h3>
+                </div>
+
+                <div class="nav-links ">
+                    <div class="img-search nav-icon">
+                        <span class="material-symbols-outlined">
+                            search
+                        </span>
+                    </div>
+                    <div class="img-filter nav-icon">
+                        <span class="material-symbols-outlined">
+                            tune
+                        </span>
+                    </div>
+                    <!-- <div class="color-mode-switch nav-icon">
+                    <span class="material-symbols-outlined">
+                        dark_mode
+                    </span>
+                </div> -->
+                    <div class="add-img nav-icon" @click="showUploadArea">
+                        <span class="material-symbols-outlined" :style="{ transform: 'rotate('+ angle+'deg)'}">
+                            add
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+
+
+        <!---------------------------  IMG upload area  ------------------------------>
+        <div class="img-upload-container" :style="{opacity: opacity}">
+            <form @submit.prevent="onFormSubmit">
+                <input type="file" name="photo" accept="image/png, image/jpeg" />
+                <input type="text" placeholder="Project title" id="imageTitle" v-model="imageTitle">
+                <input type="text" placeholder="Project description" v-model="imageDesc">
+                <input type="text" placeholder="username" v-model="userName">
+                <input type="submit" class="btn-submit" value="Upload + " @click="uploadImage" />
+                <!-- <input type="submit" class="btn-submit" value="Upload +" /> -->
+            </form>
+            <p class="form-error">{{formerror}}</p>
+
+        </div>
+
+        <!---------------------------  IMG gallery area  ------------------------------>
+        <main>
+            <div class="imgboard-container">
+
+                <!-- img - card -->
+                <div class="outer-card" v-for="img in images">
+                    <div class="inner-card">
+                        <div class="card-img">
+                            <div class="heart">
+                                <span class="material-symbols-outlined">
+                                    favorite
+                                </span>
+                            </div>
+                            <img v-bind:src=img.url alt="img.title" v-bind:id=img.id v-on:click="openModal" />
+                        </div>
+                        <div class="card-desc">
+                            <a href="#">{{img.title}}</a>
+                            <div class="artist-play-container">
+                                <p>{{img.username}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+        </main>
+
+        <!-- Overlay background for Modal-->
+        <div v-show="overlayBackground" id="overlay" v-on:click="closeModal"></div>
+
+        <!-- Modal -->
+        <modal v-if="modalID" v-bind:id="modalID" v-on:close-modal="closeModal" class="modal-component">
+        </modal>
+
+        <div class="load-more-container">
+            <button v-if="more" v-on:click="loadMore">load more</button>
+        </div>
+    </div>
+
+
+
+    <!-- Import App -->
+    <script src="/js/app.js" type="module" crossorigin="use-credentials"></script>
+
+
+</body>
+
+</html>

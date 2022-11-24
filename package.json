@@ -1,0 +1,27 @@
+{
+    "name": "imageboard",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "concurrently \"nodemon server.js\" \"browser-sync start --proxy 'localhost:8080' --files '**/*'\""
+    },
+    "engines": {
+        "node": "14.20.1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "aws-sdk": "^2.476.0",
+        "dotenv": "^16.0.3",
+        "express": "^4.14.0",
+        "multer": "^1.4.4",
+        "spiced-pg": "^1.0.4",
+        "uid-safe": "^2.1.5"
+    },
+    "devDependencies": {
+        "browser-sync": "^2.27.10",
+        "concurrently": "^7.5.0"
+    }
+}
