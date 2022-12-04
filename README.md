@@ -24,6 +24,7 @@ Imageboard Project allow users to upload images with description and username, a
 ![localhost_3000_ (2)](https://user-images.githubusercontent.com/90706137/204088810-c7b81b66-ed75-411a-b6c9-b7ad13ca5fe0.png)
 
 
-##MIT License
+## License
 
+MIT License
 Copyright (c) 2022 Rihan
