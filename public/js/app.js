@@ -2,6 +2,8 @@ import * as Vue from './vue.js';
 // import component
 import modal from "./modal.js";
 
+const PORT = 5173;
+
 // create Vue app
 Vue.createApp({
 
@@ -70,7 +72,7 @@ Vue.createApp({
 
             console.log(formData);
             // send form data to the server
-            fetch("/upload", {
+            fetch(`http://localhost:${PORT}/upload`, {
                 method: "POST",
                 body: formData,
             })
@@ -115,7 +117,7 @@ Vue.createApp({
             // console.log(this.lastId);
 
             // send last img id to server
-            fetch(`/loadmore/${this.lastId} `).then(res => res.json()).then(imgsData => {
+            fetch(`http://localhost:${PORT}/loadmore/${this.lastId} `).then(res => res.json()).then(imgsData => {
                 // console.log(imgsData);
                 this.images.push(...imgsData);
 
@@ -132,10 +134,12 @@ Vue.createApp({
     },
 
     mounted() {
-        fetch("/images").then(res => res.json()).then(imgsData => {
-            //console.log(imgsData);
-            this.images = imgsData;
-        });
+        fetch(`http://localhost:${PORT}/images`)
+            .then(res => res.json())
+            .then(imgsData => {
+                //console.log(imgsData);
+                this.images = imgsData;
+            });
 
         //console.log(location.pathname);
 
@@ -143,7 +147,7 @@ Vue.createApp({
 
         if (userUrl[1] == "imgs" && userUrl.length == 3 &&
             isNaN(userUrl[2]) == false) {
-            fetch(`/images/${userUrl[2]}`).then(res => res.json()).then(imgData => {
+            fetch(`http://localhost:${PORT}/images/${userUrl[2]}`).then(res => res.json()).then(imgData => {
                 console.log("this img is clicked", imgData);
                 if (imgData) {
                     this.modalID = userUrl[2];
@@ -159,7 +163,7 @@ Vue.createApp({
 
             if (userUrl[1] == "imgs" && userUrl.length == 3 &&
                 isNaN(userUrl[2]) == false) {
-                fetch(`/images/${userUrl[2]}`).then(res => res.json()).then(imgData => {
+                fetch(`http://localhost:${PORT}/images/${userUrl[2]}`).then(res => res.json()).then(imgData => {
                     console.log("this img is clicked", imgData);
                     if (imgData) {
                         this.modalID = userUrl[2];
