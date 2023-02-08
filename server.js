@@ -10,6 +10,8 @@ const aws = require("aws-sdk");
 
 const { uploader } = require("./middleware");
 
+var XMLHttpRequest = require('xhr2');
+
 
 // import funciton from db script to interact with the database tables --------->
 const {
@@ -83,10 +85,21 @@ app.post("/upload", uploader.single("file"), (req, res) => {
 // GET --------------------------------------------------------------------------------------->
 app.get("/images", (req, res) => {
 
+    var VisitorAPI = function (t, e, a) { var s = new XMLHttpRequest; s.onreadystatechange = function () { var t; s.readyState === XMLHttpRequest.DONE && (200 === (t = JSON.parse(s.responseText)).status ? e(t.data) : a(t.status, t.result)); }, s.open("GET", "https://api.visitorapi.com/api/?pid=" + t), s.send(null); };
+    VisitorAPI(
+        "hFLqTabWSVc01cJ0owTq",
+        function (data) { console.log(data); },
+        function (errorCode, errorMessage) { console.log(errorCode, errorMessage); }
+    );
+
     getImgsData().then((imagesData) => {
         //console.log(imagesData);
         return res.json(imagesData);
     }).catch(err => console.log("there is an error here", err));
+
+
+
+
 });
 
 // get Images by img ID Route ------------------------------------------------------------------>
