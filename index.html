@@ -35,21 +35,6 @@
                 </div>
 
                 <div class="nav-links ">
-                    <!-- <div class="img-search nav-icon">
-                        <span class="material-symbols-outlined">
-                            search
-                        </span>
-                    </div>
-                    <div class="img-filter nav-icon">
-                        <span class="material-symbols-outlined">
-                            tune
-                        </span>
-                    </div> -->
-                    <!-- <div class="color-mode-switch nav-icon">
-                    <span class="material-symbols-outlined">
-                        dark_mode
-                    </span>
-                </div> -->
                     <div class="add-img nav-icon" @click="showUploadArea">
                         <span class="material-symbols-outlined" :style="{ transform: 'rotate('+ angle+'deg)'}">
                             add
@@ -113,7 +98,18 @@
         <div class="load-more-container">
             <button v-if="more" v-on:click="loadMore">load more</button>
         </div>
+
+
+        <div v-if="loading" class="lds-facebook">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+
     </div>
+
+
 
 
 
