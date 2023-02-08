@@ -21,12 +21,13 @@
         "express": "^4.14.0",
         "multer": "^1.4.4",
         "spiced-pg": "^1.0.4",
-        "uid-safe": "^2.1.5"
+        "uid-safe": "^2.1.5",
+        "xhr2": "^0.2.1"
     },
     "devDependencies": {
+        "@vitejs/plugin-vue": "^4.0.0",
         "browser-sync": "^2.27.10",
         "concurrently": "^7.5.0",
-        "@vitejs/plugin-vue": "^4.0.0",
         "vite": "^4.1.1"
     }
 }
