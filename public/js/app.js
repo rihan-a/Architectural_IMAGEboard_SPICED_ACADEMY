@@ -2,8 +2,6 @@ import * as Vue from './vue.js';
 // import component
 import modal from "./modal.js";
 
-const PORT = 5173;
-
 // create Vue app
 Vue.createApp({
 
@@ -22,6 +20,7 @@ Vue.createApp({
             overlayBackground: false,
             more: true,
             lastId: null,
+            loading: false,
         };
     },
 
@@ -48,6 +47,7 @@ Vue.createApp({
 
         uploadImage: function () {
             console.log("upload btn clicked");
+            this.loading = true;
 
             // Check if there is no file uploaded, show error and return
             if (document.querySelector("input[type=file]").files.length < 1) {
@@ -72,7 +72,7 @@ Vue.createApp({
 
             console.log(formData);
             // send form data to the server
-            fetch(`http://localhost:${PORT}/upload`, {
+            fetch(`/upload`, {
                 method: "POST",
                 body: formData,
             })
@@ -86,7 +86,7 @@ Vue.createApp({
                     this.imageTitle = "";
                     this.imageDesc = "";
                     this.userName = "";
-
+                    this.loading = false;
                 })
                 .catch((err) => {
                     console.log("err", err);
@@ -117,7 +117,7 @@ Vue.createApp({
             // console.log(this.lastId);
 
             // send last img id to server
-            fetch(`http://localhost:${PORT}/loadmore/${this.lastId} `).then(res => res.json()).then(imgsData => {
+            fetch(`/loadmore/${this.lastId} `).then(res => res.json()).then(imgsData => {
                 // console.log(imgsData);
                 this.images.push(...imgsData);
 
@@ -134,7 +134,7 @@ Vue.createApp({
     },
 
     mounted() {
-        fetch(`http://localhost:${PORT}/images`)
+        fetch(`/images`)
             .then(res => res.json())
             .then(imgsData => {
                 //console.log(imgsData);
@@ -147,7 +147,7 @@ Vue.createApp({
 
         if (userUrl[1] == "imgs" && userUrl.length == 3 &&
             isNaN(userUrl[2]) == false) {
-            fetch(`http://localhost:${PORT}/images/${userUrl[2]}`).then(res => res.json()).then(imgData => {
+            fetch(`/images/${userUrl[2]}`).then(res => res.json()).then(imgData => {
                 console.log("this img is clicked", imgData);
                 if (imgData) {
                     this.modalID = userUrl[2];
@@ -163,7 +163,7 @@ Vue.createApp({
 
             if (userUrl[1] == "imgs" && userUrl.length == 3 &&
                 isNaN(userUrl[2]) == false) {
-                fetch(`http://localhost:${PORT}/images/${userUrl[2]}`).then(res => res.json()).then(imgData => {
+                fetch(`/images/${userUrl[2]}`).then(res => res.json()).then(imgData => {
                     console.log("this img is clicked", imgData);
                     if (imgData) {
                         this.modalID = userUrl[2];
