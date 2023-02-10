@@ -5,12 +5,11 @@ const app = express();
 const fs = require("fs");
 require("dotenv").config();
 const { PORT = 8080 } = process.env;
-
 const aws = require("aws-sdk");
-
 const { uploader } = require("./middleware");
-
 var XMLHttpRequest = require('xhr2');
+const util = require("util");
+const unlinkFile = util.promisify(fs.unlink);
 
 
 // import funciton from db script to interact with the database tables --------->
@@ -68,6 +67,8 @@ app.post("/upload", uploader.single("file"), (req, res) => {
                     //console.log(imageData);
                     return res.json(imageData);
                 }).catch(err => console.log(err));
+                // Delete image from local storage
+                unlinkFile(req.file.path);
             })
             .catch((err) => {
                 console.log(err);
